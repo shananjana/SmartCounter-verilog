@@ -1,0 +1,186 @@
+//1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 ECE2072 Assignment 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1
+//
+//     To be completed by Indrajith Udantha Ranaweera 30769094
+//     Your count sequence is: 307662144541296773 Note that the sequence wraps around at both ends.
+//     Do not share or show this file with anyone. Do not include any code from others' files in this file.
+//     For marking and Turnitin exclusions, leave all comments in this file unaltered.
+//
+//1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 ECE2072 Assignment 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1
+ 
+ 
+//1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 Module CounterSkipReverse 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1
+//
+//   Sequential module to produce oState changes on each Clk posedge using the above count sequence.
+//
+//1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 Module CounterSkipReverse 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1
+ 
+module CounterSkipReverse(iClk, iRst, iSkip, iRev, oState);
+   input iClk, iRst, iSkip, iRev;
+   output reg [4:0] oState;
+   //declare internal wires and reg types here:
+	reg [4:0] oState_reg= 5'b0;
+	
+	always @(posedge iClk or posedge iRst)
+		begin
+			if (iRst)
+				begin
+					oState<=5'b0;
+					oState_reg<=oState_reg;
+				end
+			else
+				begin
+					case({iSkip,iRev})
+						2'b11:
+							begin
+								oState<=oState_reg;
+								if (oState_reg==5'b10000)
+									begin
+										oState_reg<=5'b0;
+									end
+								else if (oState_reg==5'b10001)
+									begin
+										oState_reg<=5'b1;
+									end 
+								else
+									begin
+										oState_reg<=oState_reg+5'b10;
+									end
+							end
+						2'b10:
+							begin
+								oState<=oState_reg;
+								if (oState_reg==5'b1111)
+									begin
+										oState_reg<=5'b0;
+									end
+								else if (oState_reg==5'b10000)
+									begin
+										oState_reg<=5'b1;
+									end
+								else if (oState_reg==5'b10001)
+									begin
+										oState_reg<=5'b10;
+									end	
+								else
+									begin
+										oState_reg<=oState_reg+5'b11;
+									end
+							end
+						2'b01:
+							begin
+								oState<=oState_reg;
+								if (oState_reg==5'b0)
+									begin
+										oState_reg<=5'b10001;
+									end
+								else
+									begin
+										oState_reg<=oState_reg-5'b1;
+									end
+							end
+						2'b00:
+							begin
+								oState<=oState_reg;
+								if (oState_reg==5'b10001)
+									begin
+										oState_reg<=5'b0;
+									end
+								else
+									begin
+										oState_reg<=oState_reg+5'b1;
+									end
+							end
+					endcase
+				end
+	end
+ 
+ 
+endmodule //1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 CounterSkipReverse 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 
+ 
+ 
+ 
+//1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 Module StateToCountSequence 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1
+//
+//    Combinational module to map iState to a 4 bit BCD output
+//
+//1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 Module StateToCountSequence 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1
+ 
+module StateToCountSequence(iState, oV);
+	//declare the input and output 
+	input [4:0] iState;
+	output [3:0] oV;
+ 
+  
+	//declare any internal wire and reg types here.
+	reg [3:0] mem_array [4:0];
+	
+	initial 
+	begin : INIT
+		integer i;
+		for(i = 0; i < 32; i = i + 1)
+			mem_array[i] = 4'b0;
+			
+		mem_array[5'd0] = 4'd3;
+		mem_array[5'd1] = 8'd0;
+		mem_array[5'd2] = 8'd7;
+		mem_array[5'd3] = 8'd6;
+		mem_array[5'd4] = 8'd6;
+		mem_array[5'd5] = 8'd2;
+		mem_array[5'd6] = 8'd1;
+		mem_array[5'd7] = 8'd4;
+		mem_array[5'd8] = 8'd4;
+		mem_array[5'd9] = 8'd5;
+		mem_array[5'd10] = 8'd4;
+		mem_array[5'd11] = 8'd1;
+		mem_array[5'd12] = 8'd2;
+		mem_array[5'd13] = 8'd9;
+		mem_array[5'd14] = 8'd6;
+		mem_array[5'd15] = 8'd7;
+		mem_array[5'd16] = 8'd7;
+		mem_array[5'd17] = 8'd3;
+		
+	end 
+	
+	assign oV=mem_array[iState];
+  
+  
+	//Have you checked for inferred latches in this module?
+endmodule //1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 StateToCountSequence 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 
+ 
+ 
+ 
+//1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 Module CompleteCounter 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1
+//
+//   Instantiates previous modules for complete design
+//
+//1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 Module CompleteCounter 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1
+ 
+module CompleteCounter(iClk, iRst, iSkip, iRev, oV, oState);
+	input iClk, iRst, iSkip, iRev;
+	output [3:0] oV;
+	//declare oState next line
+	output [4:0] oState;
+ 
+ 
+	CounterSkipReverse cntr(.iClk(iClk), .iRst(iRst), .iSkip(iSkip), .iRev(iRev), .oState(oState));
+	StateToCountSequence statemap(.iState(oState), .oV(oV));
+endmodule //1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 CompleteCounter 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1
+ 
+ 
+ 
+//1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 Module AssignmentTestBench 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1
+//
+//   This testbench needs to check all possible transitions in your counter design.
+//   It should be written using an independent approach to the synthesisable code above
+//
+//1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 Module AssignmentTestBench 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1
+ 
+//module AssignmentTestBench;
+ 
+   //declare internal signals and instantiate module CompleteCounter.
+ 
+   //generate test sequences for all state transitions
+   
+  
+ 
+//endmodule //1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 AssignmentTestBench 1ll1lll1111ll1ll1l11ll111ll1ll1l11l1 

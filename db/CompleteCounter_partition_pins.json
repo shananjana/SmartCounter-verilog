@@ -1,0 +1,61 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "oV[0]",
+					"strict" : false
+				},
+				{
+					"name" : "oV[1]",
+					"strict" : false
+				},
+				{
+					"name" : "oV[2]",
+					"strict" : false
+				},
+				{
+					"name" : "oV[3]",
+					"strict" : false
+				},
+				{
+					"name" : "oState[0]",
+					"strict" : false
+				},
+				{
+					"name" : "oState[1]",
+					"strict" : false
+				},
+				{
+					"name" : "oState[2]",
+					"strict" : false
+				},
+				{
+					"name" : "oState[3]",
+					"strict" : false
+				},
+				{
+					"name" : "oState[4]",
+					"strict" : false
+				},
+				{
+					"name" : "iClk",
+					"strict" : false
+				},
+				{
+					"name" : "iRst",
+					"strict" : false
+				},
+				{
+					"name" : "iSkip",
+					"strict" : false
+				},
+				{
+					"name" : "iRev",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

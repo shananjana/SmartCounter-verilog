@@ -1,0 +1,66 @@
+|CompleteCounter
+iClk => iClk.IN1
+iRst => iRst.IN1
+iSkip => iSkip.IN1
+iRev => iRev.IN1
+oV[0] <= StateToCountSequence:statemap.oV
+oV[1] <= StateToCountSequence:statemap.oV
+oV[2] <= StateToCountSequence:statemap.oV
+oV[3] <= StateToCountSequence:statemap.oV
+oState[0] <= oState[0].DB_MAX_OUTPUT_PORT_TYPE
+oState[1] <= oState[1].DB_MAX_OUTPUT_PORT_TYPE
+oState[2] <= oState[2].DB_MAX_OUTPUT_PORT_TYPE
+oState[3] <= oState[3].DB_MAX_OUTPUT_PORT_TYPE
+oState[4] <= oState[4].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CompleteCounter|CounterSkipReverse:cntr
+iClk => oState_reg[0].CLK
+iClk => oState_reg[1].CLK
+iClk => oState_reg[2].CLK
+iClk => oState_reg[3].CLK
+iClk => oState_reg[4].CLK
+iClk => oState[0]~reg0.CLK
+iClk => oState[1]~reg0.CLK
+iClk => oState[2]~reg0.CLK
+iClk => oState[3]~reg0.CLK
+iClk => oState[4]~reg0.CLK
+iRst => oState[0]~reg0.ACLR
+iRst => oState[1]~reg0.ACLR
+iRst => oState[2]~reg0.ACLR
+iRst => oState[3]~reg0.ACLR
+iRst => oState[4]~reg0.ACLR
+iRst => oState_reg[0].ENA
+iRst => oState_reg[4].ENA
+iRst => oState_reg[3].ENA
+iRst => oState_reg[2].ENA
+iRst => oState_reg[1].ENA
+iSkip => Mux0.IN4
+iSkip => Mux1.IN4
+iSkip => Mux2.IN4
+iSkip => Mux3.IN4
+iSkip => Mux4.IN4
+iRev => Mux0.IN5
+iRev => Mux1.IN5
+iRev => Mux2.IN5
+iRev => Mux3.IN5
+iRev => Mux4.IN5
+oState[0] <= oState[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+oState[1] <= oState[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+oState[2] <= oState[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+oState[3] <= oState[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+oState[4] <= oState[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CompleteCounter|StateToCountSequence:statemap
+iState[0] => mem_array.RADDR
+iState[1] => mem_array.RADDR1
+iState[2] => mem_array.RADDR2
+iState[3] => mem_array.RADDR3
+iState[4] => mem_array.RADDR4
+oV[0] <= mem_array.DATAOUT
+oV[1] <= mem_array.DATAOUT1
+oV[2] <= mem_array.DATAOUT2
+oV[3] <= mem_array.DATAOUT3
+
+

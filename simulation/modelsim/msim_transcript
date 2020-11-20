@@ -1,0 +1,86 @@
+# Reading C:/intelFPGA_lite/18.1/modelsim_ase/tcl/vsim/pref.tcl
+# do CompleteCounter_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 10.5b Lib Mapping Utility 2016.10 Oct  5 2016
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/18.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vlog -vlog01compat -work work +incdir+C:/intelFPGA_lite/18.1/CompleteCounter {C:/intelFPGA_lite/18.1/CompleteCounter/CompleteCounter.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 00:21:16 on Oct 27,2020
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/intelFPGA_lite/18.1/CompleteCounter" C:/intelFPGA_lite/18.1/CompleteCounter/CompleteCounter.v 
+# -- Compiling module CounterSkipReverse
+# -- Compiling module StateToCountSequence
+# -- Compiling module CompleteCounter
+# -- Compiling module AssignmentTestBench
+# 
+# Top level modules:
+# 	AssignmentTestBench
+# End time: 00:21:16 on Oct 27,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+vsim work.AssignmentTestBench
+# vsim work.AssignmentTestBench 
+# Start time: 00:21:25 on Oct 27,2020
+# Loading work.AssignmentTestBench
+# Loading work.CompleteCounter
+# Loading work.CounterSkipReverse
+# Loading work.StateToCountSequence
+add wave -position insertpoint  \
+sim:/AssignmentTestBench/iClk \
+sim:/AssignmentTestBench/iSkip \
+sim:/AssignmentTestBench/iRev \
+sim:/AssignmentTestBench/oV \
+sim:/AssignmentTestBench/oState
+run
+restart
+vlog -reportprogress 300 -work work C:/intelFPGA_lite/18.1/CompleteCounter/CompleteCounter.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 00:37:41 on Oct 27,2020
+# vlog -reportprogress 300 -work work C:/intelFPGA_lite/18.1/CompleteCounter/CompleteCounter.v 
+# -- Compiling module CounterSkipReverse
+# -- Compiling module StateToCountSequence
+# -- Compiling module CompleteCounter
+# -- Compiling module AssignmentTestBench
+# 
+# Top level modules:
+# 	AssignmentTestBench
+# End time: 00:37:41 on Oct 27,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart
+# Loading work.AssignmentTestBench
+# Loading work.CompleteCounter
+# Loading work.CounterSkipReverse
+# Loading work.StateToCountSequence
+run
+vlog -reportprogress 300 -work work C:/intelFPGA_lite/18.1/CompleteCounter/CompleteCounter.v
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 00:39:41 on Oct 27,2020
+# vlog -reportprogress 300 -work work C:/intelFPGA_lite/18.1/CompleteCounter/CompleteCounter.v 
+# -- Compiling module CounterSkipReverse
+# -- Compiling module StateToCountSequence
+# -- Compiling module CompleteCounter
+# -- Compiling module AssignmentTestBench
+# 
+# Top level modules:
+# 	AssignmentTestBench
+# End time: 00:39:41 on Oct 27,2020, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart
+# Loading work.AssignmentTestBench
+# Loading work.CompleteCounter
+# Loading work.CounterSkipReverse
+# Loading work.StateToCountSequence
+run
+restart
+run
+run
+restart
+run
+# End time: 00:51:02 on Oct 27,2020, Elapsed time: 0:29:37
+# Errors: 0, Warnings: 0
